@@ -1,0 +1,129 @@
+---
+title: "Alpscarf_dev"
+output: html_document
+---
+
+```{r setup, echo = FALSE}
+# The following code loads package (and install them if not exist).
+# These are packages that Chat found useful in typical data analysis. Feel free to add/remove them.
+
+## The "pacman" package automatically install missing packages and load them
+if (!require("pacman")) install.packages("pacman", repos='https://stat.ethz.ch/CRAN/'); library(pacman)
+p_load(
+  DT,         # for showing data table with navigation/search controls
+  tidyr,      # collection of the tidyverse packages:
+  dplyr,      #   - for data wrangling
+  tibble,     #   - a stricter alternative to data.frame
+  readr,      #   - a stricter alternative to read.csv
+  broom,      #   - for cleaing output from models, e.g., lm()
+  ggplot2,    #   - for plotting
+  cowplot,    # adds plot_grid() to put multiple ggplot()'s togeter
+  GGally,     # adds ggpairs() which is a smarter scatterplot matrix
+  assertthat, # for unit-testing your functions
+  car,        # grab bag of useful functions for NHST
+  GetoptLong, # string interpolation. See qq() explanation below
+  lubridate   # utility for parsing and performing arithematic on dates 
+)
+
+
+# The following code configure frequently-used functions
+
+## string interpolation
+##  The qq package allows you to format your string with PHP-like syntax.
+##  With the following configuration, you can replace:
+##      paste("Number of rows: ", nrow(df), ", number of columns: ", ncol(df))
+##  with:
+###     qq("Number of rows: #{nrow(df)}, number of columns: #{ncol(df)}")
+qq.options("code.pattern" = "#\\{CODE\\}") 
+
+## plot theme
+##  I usually use this theme to generate printer-friendly plots.
+##  To use this, add it to your ggplot() object.
+myTheme <- theme(panel.background = element_blank(), panel.grid.major = element_line(color="lightgrey", size = 0.2))
+
+## Decimal output
+##   This makes the number printed in tables have only two digits after the 
+##   decimal points.
+options(scipen=1, digits=2)
+
+## Datatable
+##   These are options for using datatable() to show your raw data.frame or 
+##   tibble as a multi-page table.
+options(DT.options = list(pageLength = 10))
+options(DT.autoHideNavigation = TRUE)
+
+library(alpscarf)
+import::from(magrittr, "%<>%")
+
+# For PCA
+#library(psych)
+
+#library(RColorBrewer)
+#library(stringdist)
+
+```
+
+```{r get dataset, echo = FALSE}
+# specify dataset name & path
+dataset_path = "."
+example_dataset <- file.path(dataset_path, "reduced_dwell.RData")
+expected_aoi_sequence <- file.path(dataset_path, "aoi_sequence.RData")
+
+# load data  
+load(example_dataset)
+load(expected_aoi_sequence)
+
+# sort AOI order
+aoi_names_pages_seq %<>%
+  arrange(AOI_order)
+```
+
+```{r Kai's playground of Alpscarf}
+# define colors
+my_palette <- 
+  aoi_names_pages_seq$color[]
+
+# generate Alpscarf dataset
+lsa_reduced_dwell_alp_df <- alpscarf_height_trans(lsa_reduced_dwell_df, aoi_names_pages_seq)
+
+# stats of Alpscarf
+stat_table_df <- alpscarf_calculate_statistics(lsa_reduced_dwell_alp_df, aoi_names_pages_seq)
+
+# plot Alpscarf
+# TODO: annotation (creeks)
+lsa_scarf_vis <- list()
+for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
+  df_p <-
+    lsa_reduced_dwell_alp_df %>%
+    filter(p_name == a_p_name) 
+  # for indexing
+  a_p_nr <- 
+    strsplit(a_p_name,"P")[[1]][2] %>%
+    as.numeric()
+  
+  # calculate the position of bars where bar width equals dewll duration
+  df_p_temp <-
+    alpscarf_width_trans(df_p)
+  
+  # generate info for annotation
+  df_p_temp %<>%
+    # hightlight graph_AOI & no_special_behavior
+    mutate(graph_AOI = if_else(AOI %in% c("G1_SUBJ", "G2_OBJ", "G3_DIFF"), 0, NULL),
+           spatial_order_following = if_else(conformity_score > 0, TRUE, FALSE),
+           re_reading = if_else(revisiting_score > 0, TRUE, FALSE),
+           no_order_follow_nor_re_reading = if_else(!spatial_order_following & !re_reading, 0, NULL))
+  
+  # specify the color association of AOIs
+  aoi_name_in_order <- 
+    aoi_names_pages_seq$AOI[]
+  df_p_temp$AOI <- factor(df_p_temp$AOI, levels = aoi_name_in_order)
+  
+  # Alpscarf plot generation
+  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p_temp, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = max(lsa_reduced_dwell_alp_df$seq_bar_length))
+}
+#plot_grid(lsa_scarf_vis[[7]])
+#ggsave(file = "temp.png", plot = last_plot(), width = 10, height = 20, device = "png", bg = "transparent")
+
+plot_grid(lsa_scarf_vis[[7]], lsa_scarf_vis[[14]], lsa_scarf_vis[[11]], lsa_scarf_vis[[17]], lsa_scarf_vis[[15]], lsa_scarf_vis[[5]], lsa_scarf_vis[[1]], lsa_scarf_vis[[13]], lsa_scarf_vis[[16]], lsa_scarf_vis[[6]], lsa_scarf_vis[[4]], lsa_scarf_vis[[10]], lsa_scarf_vis[[12]], lsa_scarf_vis[[2]], lsa_scarf_vis[[3]], lsa_scarf_vis[[18]], lsa_scarf_vis[[8]], align = "hv", ncol = 2)
+ggsave(file = "temp.png", plot = last_plot(), width = 49, height = 49, device = "png", bg = "transparent")
+```
