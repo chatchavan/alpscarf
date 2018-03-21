@@ -2,7 +2,7 @@
 % Please edit documentation in R/alpscarf_statistics.R
 \name{alpscarf_calculate_statistics}
 \alias{alpscarf_calculate_statistics}
-\title{Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) assist reading Alpscarf}
+\title{Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) to assist in reading Alpscarf}
 \usage{
 alpscarf_calculate_statistics(df_alp_p, aoi_names_pages_seq)
 }
@@ -12,8 +12,8 @@ alpscarf_calculate_statistics(df_alp_p, aoi_names_pages_seq)
 \item{aoi_names_pages_seq}{expected visit order, two columns "AOI" and "AOI_order"}
 }
 \value{
-states (order_following/rereading ratio, Levenshtein/Jaro distance)
+stats (order_following/rereading ratio, Levenshtein/Jaro distance)
 }
 \description{
-Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) assist reading Alpscarf
+Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) to assist in reading Alpscarf
 }

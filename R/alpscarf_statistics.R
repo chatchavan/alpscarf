@@ -1,9 +1,9 @@
-#' Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) assist reading Alpscarf
+#' Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) to assist in reading Alpscarf
 #'
 #' @param df_alp_p dataset with Alpscarf info, at least four columns "p_name" "AOI" "conformity_score" "revisiting_score"
 #' @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
 #'
-#' @return states (order_following/rereading ratio, Levenshtein/Jaro distance)
+#' @return stats (order_following/rereading ratio, Levenshtein/Jaro distance)
 #' @export
 #' @import stringdist
 #' @importFrom magrittr "%<>%"

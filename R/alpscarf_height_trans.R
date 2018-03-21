@@ -1,4 +1,4 @@
-#' calculate conformity/revisiting scores and translate them into bar height info of Alpscarf
+#' calculate conformity/revisiting scores and translate them into bar height
 #'
 #' @param lsa_reduced_dwell_df the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"
 #' @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
@@ -6,7 +6,7 @@
 #' @param scale_factor to specify scale of mountain height
 #' @param base_factor to specify the base of exponent which changes mountain shape, only used in exponential mode
 #'
-#' @return dataset with conformity/revisiting scores and bar height info
+#' @return dataset with conformity/revisiting scores and bar height information
 #' @export
 #' @importFrom magrittr "%<>%"
 #'

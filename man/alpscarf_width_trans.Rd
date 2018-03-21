@@ -2,7 +2,7 @@
 % Please edit documentation in R/alpscarf_width_trans.R
 \name{alpscarf_width_trans}
 \alias{alpscarf_width_trans}
-\title{translate durations into bar width info of Alpscarf}
+\title{translate durations into bar width}
 \usage{
 alpscarf_width_trans(df_p)
 }
@@ -10,8 +10,8 @@ alpscarf_width_trans(df_p)
 \item{df_p}{dataset contains 4 columns "AOI" "dwell_duration" "re_reading_bar_length" "seq_bar_length"}
 }
 \value{
-translated bar width/height info
+dataset with bar width information
 }
 \description{
-translate durations into bar width info of Alpscarf
+translate durations into bar width
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/alpscarf_height_trans.R
 \name{alpscarf_height_trans}
 \alias{alpscarf_height_trans}
-\title{calculate conformity/revisiting scores and translate them into bar height info of Alpscarf}
+\title{calculate conformity/revisiting scores and translate them into bar height}
 \usage{
 alpscarf_height_trans(lsa_reduced_dwell_df, aoi_names_pages_seq,
   LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2)
@@ -19,8 +19,8 @@ alpscarf_height_trans(lsa_reduced_dwell_df, aoi_names_pages_seq,
 \item{base_factor}{to specify the base of exponent which changes mountain shape, only used in exponential mode}
 }
 \value{
-dataset with conformity/revisiting scores and bar height info
+dataset with conformity/revisiting scores and bar height information
 }
 \description{
-calculate conformity/revisiting scores and translate them into bar height info of Alpscarf
+calculate conformity/revisiting scores and translate them into bar height
 }

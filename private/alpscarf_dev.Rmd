@@ -20,7 +20,7 @@ library(alpscarf)
 
 ```{r get dataset, echo = FALSE}
 # specify dataset name & path
-dataset_path = "."
+dataset_path = "../data"
 example_dataset <- file.path(dataset_path, "reduced_dwell.RData")
 expected_aoi_sequence <- file.path(dataset_path, "aoi_sequence.RData")
 
@@ -64,8 +64,7 @@ for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
     as.numeric()
   
   # calculate the position of bars where bar width equals dewll duration
-  df_p_temp <-
-    alpscarf_width_trans(df_p)
+  df_p_temp <- alpscarf_width_trans(df_p)
   
   # # generate info for annotation
   # df_p_temp %<>%

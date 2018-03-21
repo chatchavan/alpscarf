@@ -1,8 +1,8 @@
-#' translate durations into bar width info of Alpscarf
+#' translate durations into bar width
 #'
 #' @param df_p dataset contains 4 columns "AOI" "dwell_duration" "re_reading_bar_length" "seq_bar_length"
 #'
-#' @return translated bar width/height info
+#' @return dataset with bar width information
 #' @export
 #' @importFrom magrittr "%<>%"
 #'
