@@ -27,3 +27,7 @@ In `/private/alpscarf_dev.Rmd` you would find an example which guides users to g
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Resources
+
+* [CHI 2018 Late Breaking Work](https://zpac.ch/chi2018/Alpscarf.pdf)
