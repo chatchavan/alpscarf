@@ -39,8 +39,13 @@ aoi_names_pages_seq %<>%
 my_palette <- 
   aoi_names_pages_seq$color[]
 
-# generate Alpscarf dataset; calculate the confomity/revisiting scores and translate them into bar height
-lsa_reduced_dwell_alp_df <- alpscarf_height_trans(lsa_reduced_dwell_df, aoi_names_pages_seq)
+# generate Alpscarf dataset; 
+# 1. calculate the confomity/revisiting scores and translate them into bar height
+# 2. calculate the position of bars where bar width equals dewll duration
+lsa_reduced_dwell_alp_df <- 
+  lsa_reduced_dwell_df %>%
+  alpscarf_height_trans(., aoi_names_pages_seq) %>%
+  alpscarf_width_trans()
 
 # generate stats of Alpscarf; not required in generating Alpscarf.
 stat_table_df <- alpscarf_calculate_statistics(lsa_reduced_dwell_alp_df, aoi_names_pages_seq)
@@ -63,9 +68,6 @@ for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
     strsplit(a_p_name,"P")[[1]][2] %>%
     as.numeric()
   
-  # calculate the position of bars where bar width equals dewll duration
-  df_p_temp <- alpscarf_width_trans(df_p)
-  
   # # generate info for annotation
   # df_p_temp %<>%
   #   # hightlight graph_AOI & no_special_behavior
@@ -77,12 +79,12 @@ for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
   # specify the color association of AOIs
   aoi_name_in_order <- 
     aoi_names_pages_seq$AOI[]
-  df_p_temp$AOI <- factor(df_p_temp$AOI, levels = aoi_name_in_order)
+  df_p$AOI <- factor(df_p$AOI, levels = aoi_name_in_order)
   
   # Alpscarf plot generation
   # below is an example generates "Alpscarf"" in "transition-focus" mode. One can also generate Alpscarf in duration-focus mode, or even traditional scarf plot.
   # "max_y_value" specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
-  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p_temp, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = plot_height)
+  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = FALSE, ALPSCARF_EN = TRUE,  max_y_value = plot_height)
 }
 
 # plot Alpscarf for all participants

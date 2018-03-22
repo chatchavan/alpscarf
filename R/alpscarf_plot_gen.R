@@ -1,6 +1,6 @@
 #' Alpscarf plot generation
 #'
-#' @param df_p dataset contains the bar width/height info of Alpscarf, contains 5 columns "AOI" "trial" "bar_position" "dwell_duration_category" "bar_length"
+#' @param df_p dataset contains the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"
 #' @param my_palette the color definition
 #' @param TRANSITION_FOCUS to select between transition-focus (TRUE) and duration-focus (FALSE) mode, default = TRUE
 #' @param max_y_value the range (in y-axis) to plot
@@ -14,6 +14,11 @@
 #' @importFrom magrittr "%<>%"
 #'
 alpscarf_plot_gen <- function(df_p, my_palette, TRANSITION_FOCUS = TRUE, max_y_value = 4, ALPSCARF_EN = TRUE, creek_offset = 0.04, creek_size = 2, TITLE_EN = TRUE) {
+
+  # combine seq_bar and re-reading bar into one bar
+  df_p %<>%
+    mutate(re_reading_bar_length = -re_reading_bar_length) %>%
+    gather(key = "bar_type", value = "bar_length", c("seq_bar_length", "re_reading_bar_length"))
 
   # alpscarf information collection
   if (TRANSITION_FOCUS){

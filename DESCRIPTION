@@ -42,4 +42,5 @@ Collate:
     'alpscarf_plot_gen.R'
     'alpscarf_statistics.R'
     'alpscarf_width_trans.R'
+    'data.R'
 

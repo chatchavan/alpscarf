@@ -1,22 +1,22 @@
 #' calculate conformity/revisiting scores and translate them into bar height
 #'
-#' @param lsa_reduced_dwell_df the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"
+#' @param dwell_df the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"
 #' @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
-#' @param LINEAR_MODE to select linear mode (TRUE) or exponential mode (FALSE), default = TRUE
+#' @param LINEAR_MODE to select linear mode (TRUE) or exponential mode (FALSE) of mountain height, default = TRUE
 #' @param scale_factor to specify scale of mountain height
-#' @param base_factor to specify the base of exponent which changes mountain shape, only used in exponential mode
+#' @param base_factor to specify the base of exponent which changes mountain shape, only valid in exponential mode
 #'
 #' @return dataset with conformity/revisiting scores and bar height information
 #' @export
 #' @importFrom magrittr "%<>%"
 #'
-alpscarf_height_trans <- function(lsa_reduced_dwell_df, aoi_names_pages_seq, LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2){
+alpscarf_height_trans <- function(dwell_df, aoi_names_pages_seq, LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2){
 
-  lsa_reduced_dwell_alp_df <- NULL
+  dwell_alp_df <- NULL
 
-  for (a_p_name in unique(lsa_reduced_dwell_df$p_name)){
+  for (a_p_name in unique(dwell_df$p_name)){
     df_p <-
-      lsa_reduced_dwell_df %>%
+      dwell_df %>%
       filter(p_name == a_p_name)
 
     # calculation of scores
@@ -35,11 +35,11 @@ alpscarf_height_trans <- function(lsa_reduced_dwell_df, aoi_names_pages_seq, LIN
         mutate(seq_bar_length = base_factor ^ (scale_factor * conformity_score),
                re_reading_bar_length = incr_re_reading_length * revisiting_score)
     }
-    lsa_reduced_dwell_alp_df %<>% bind_rows(df_p)
+    dwell_alp_df %<>% bind_rows(df_p)
   }
 
   # return
-  lsa_reduced_dwell_alp_df
+  dwell_alp_df
 
 }
 

@@ -4,10 +4,10 @@
 \alias{alpscarf_width_trans}
 \title{translate durations into bar width}
 \usage{
-alpscarf_width_trans(df_p)
+alpscarf_width_trans(dwell_df)
 }
 \arguments{
-\item{df_p}{dataset contains 4 columns "AOI" "dwell_duration" "re_reading_bar_length" "seq_bar_length"}
+\item{dwell_df}{dataset contains at least 3 columns, "p_name" "AOI" "dwell_duration"}
 }
 \value{
 dataset with bar width information

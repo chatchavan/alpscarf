@@ -9,7 +9,7 @@ alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE,
   creek_size = 2, TITLE_EN = TRUE)
 }
 \arguments{
-\item{df_p}{dataset contains the bar width/height info of Alpscarf, contains 5 columns "AOI" "trial" "bar_position" "dwell_duration_category" "bar_length"}
+\item{df_p}{dataset contains the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"}
 
 \item{my_palette}{the color definition}
 

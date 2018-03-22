@@ -4,19 +4,19 @@
 \alias{alpscarf_height_trans}
 \title{calculate conformity/revisiting scores and translate them into bar height}
 \usage{
-alpscarf_height_trans(lsa_reduced_dwell_df, aoi_names_pages_seq,
-  LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2)
+alpscarf_height_trans(dwell_df, aoi_names_pages_seq, LINEAR_MODE = TRUE,
+  scale_factor = 0.1, base_factor = 2)
 }
 \arguments{
-\item{lsa_reduced_dwell_df}{the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"}
+\item{dwell_df}{the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"}
 
 \item{aoi_names_pages_seq}{expected visit order, two columns "AOI" and "AOI_order"}
 
-\item{LINEAR_MODE}{to select linear mode (TRUE) or exponential mode (FALSE), default = TRUE}
+\item{LINEAR_MODE}{to select linear mode (TRUE) or exponential mode (FALSE) of mountain height, default = TRUE}
 
 \item{scale_factor}{to specify scale of mountain height}
 
-\item{base_factor}{to specify the base of exponent which changes mountain shape, only used in exponential mode}
+\item{base_factor}{to specify the base of exponent which changes mountain shape, only valid in exponential mode}
 }
 \value{
 dataset with conformity/revisiting scores and bar height information
