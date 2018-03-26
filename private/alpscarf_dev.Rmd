@@ -47,7 +47,7 @@ lsa_reduced_dwell_alp_df <-
   alpscarf_height_trans(., aoi_names_pages_seq) %>%
   alpscarf_width_trans()
 
-# generate stats of Alpscarf; not required in generating Alpscarf.
+# generate stats of Alpscarf; NOT required in generating Alpscarf.
 stat_table_df <- alpscarf_calculate_statistics(lsa_reduced_dwell_alp_df, aoi_names_pages_seq)
 
 # plot Alpscarf
