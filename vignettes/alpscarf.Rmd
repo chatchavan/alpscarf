@@ -28,7 +28,7 @@ library(alpscarf)
 ```
 
 ## Data Import
-Import example data. The dataset __reduced_dwell.RData__ incldues AOI visit sequences for 17 participants (P1 - P8, P10 - P18). The dataset __aoi_sequence.RData__ contains the expected visit order of each AOI, as well as the color that presents each AOI.
+Import example data. The dataset _reduced_dwell.RData_ includes __AOI visit sequences__ for 17 participants (P1 - P8, P10 - P18). The dataset _aoi_sequence.RData_ contains the __expected visit order__ of each AOI, as well as the __color association__ of AOIs.
 ```{r get dataset}
 # specify dataset name & path
 dataset_path = "../data"
@@ -44,12 +44,24 @@ aoi_names_pages_seq %<>%
   arrange(AOI_order)
 ```
 
+The __AOI visit sequences__ contains at least 3 columns: "AOI" "dwell_duration" "p_name" 
+```{r}
+head(lsa_reduced_dwell_df)
+```
+
+
+The __expected visit order__ contains at least two columns: "AOI" and "AOI_order".
+```{r}
+head(aoi_names_pages_seq)
+```
+In above example dataset, we merge the __expected visit order__ with and __color association__, resulting the an extra column ```color```.
+
 ## Generate Alpscarf
-When the data is ready, users would generate Alpscarf in following steps:
+When the data is ready, users can generate Alpscarf in following steps:
 
 1. Define colors for AOIs
 
-The association between AOIs and colors MUST be an 1-to-1 mapping; i.e., n AOIs require n colors. An exmaple mapping is included in the dataset __aoi_sequence.RData__.
+The association between AOIs and colors MUST be an 1-to-1 mapping; i.e., n AOIs require n colors. An exmaple of such mapping is included in the dataset _aoi_sequence.RData_.
 ```{r color association}
 # define colors
 my_palette <- 
@@ -69,7 +81,7 @@ lsa_reduced_dwell_alp_df <-
   alpscarf_height_trans(., aoi_names_pages_seq) %>%
   alpscarf_width_trans()
 ```
-Note that some parameters specifiable in the function _alpscarf_height_trans_. Users can choose from linear mode (```LINEAR_MODE = TRUE```) and exponential mode (```LINEAR_MODE = FALSE```), which controls the contrast of mountain height (i.e., make high mountains even higher, and vice versa). In exponential mode, users can also specify the base (```base_factor```) and the scale (```scale_factor```) of exponent.
+Note that some parameters are specifiable in the function _alpscarf_height_trans_. Users can choose from linear mode (```LINEAR_MODE = TRUE```) and exponential mode (```LINEAR_MODE = FALSE```), which controls the contrast of mountain height (i.e., make high mountains even higher, and vice versa). In exponential mode, users can also specify the base (```base_factor```) and the scale (```scale_factor```) of exponent.
 
 3. Generate Alpscarf plot
 
@@ -104,14 +116,14 @@ plot_grid(lsa_scarf_vis[[7]], lsa_scarf_vis[[14]], lsa_scarf_vis[[11]], lsa_scar
 # use ggsave to save plots
 ggsave(file = "temp.png", plot = last_plot(), width = 49, height = 49, device = "png", bg = "transparent")
 ```
-Note that, in this example, we generate Alpscarf in __transition-focus__ mode. Users can also generate Alpscarf in __duration-focus__ mode (```TRANSITION_FOCUS = FALSE```), or even traditional scarf plot (```ALPSCARF_EN = FALSE```).
+Note that, in above example, we generate Alpscarf in __transition-focus__ mode. Users can also generate Alpscarf in __duration-focus__ mode (```TRANSITION_FOCUS = FALSE```), or even traditional scarf plot (```ALPSCARF_EN = FALSE```).
 
 Besides, ```max_y_value``` specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
 
 
-4. (bonus) Distance measures of sequences
+4. (bonus) Distance measures of AOI visit sequences
 
-__This part is not necessary to generate Alpscarf plot__
+__This part is NOT necessary to generate Alpscarf plot__
 
 Additionally, users can get a few __descriptive stats__ (e.g., order_following, rereading ratio), and __edit distance__ between each AOI sequence and the expected visit order. 
 ```{r edit distance}
