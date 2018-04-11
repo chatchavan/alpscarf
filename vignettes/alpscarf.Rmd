@@ -108,3 +108,15 @@ Note that, in this example, we generate Alpscarf in __transition-focus__ mode. U
 
 Besides, ```max_y_value``` specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
 
+
+4. (bonus) Distance measures of sequences
+
+__This part is not necessary to generate Alpscarf plot__
+
+Additionally, users can get a few __descriptive stats__ (e.g., order_following, rereading ratio), and __edit distance__ between each AOI sequence and the expected visit order. 
+```{r edit distance}
+# generate stats of Alpscarf; NOT required in generating Alpscarf.
+stat_table_df <- alpscarf_calculate_statistics(lsa_reduced_dwell_alp_df, aoi_names_pages_seq)
+
+head(stat_table_df)
+```
