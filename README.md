@@ -22,7 +22,7 @@ The package requires three dataset as inputs:
 1. Color definition, a set of color definitions in HEX code, is a 1-to-1 mapping to the expected visit order (AOI_order).
     * In above example, if red (#ff0000) is asssigned to "A", green (#00ff00) to "B", and blue (#0000ff) to "C", the color definition set = {#ff0000, #00ff00, #0000ff}
 
-The package would first calculate the height (`alpscarf_height_trans`) and position (`alpscarf_width_trans`) of each bar in Alpscarf, and visualize in scarf plots with mountains and valleys (`alpscarf_plot_gen`). Additionally, the package calculates several measures of sequence alignment (`alpscarf_calculate_statistics`) with the use of [stringdist](https://github.com/markvanderloo/stringdist)
+The package would first calculate the height (`alpscarf_height_trans`) and position (`alpscarf_width_trans`) of each bar in Alpscarf, and visualize in scarf plots with mountains and valleys (`alpscarf_plot_gen`). Additionally, the package calculates several descriptive stats, and measures of sequence alignment (`alpscarf_calculate_statistics`) with the use of [stringdist](https://github.com/markvanderloo/stringdist)
 
 ## Example
 
