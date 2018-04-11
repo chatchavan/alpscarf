@@ -26,7 +26,7 @@ The package would first calculate the height (`alpscarf_height_trans`) and posit
 
 ## Example
 
-In `/private/alpscarf_dev.Rmd` you would find an example which guides users to generate Alpscarf step by step.
+In `/vignettes/alpscarf.Rmd` you would find an example which guides users to generate Alpscarf step by step.
 
 ## License
 
