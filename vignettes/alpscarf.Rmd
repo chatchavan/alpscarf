@@ -1,0 +1,110 @@
+---
+title: "alpscarf"
+author: "Chia-Kai Yang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{alpscarf}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Initial Setup
+Import the library we suggest to use and the package _alpscarf_.
+```{r setup, echo = FALSE}
+# The following code loads package (and install them if not exist).
+## The "pacman" package automatically install missing packages and load them
+if (!require("pacman")) install.packages("pacman", repos='https://stat.ethz.ch/CRAN/'); library(pacman)
+p_load(
+  tidyr,      # collection of the tidyverse packages:
+  dplyr,      #   - for data wrangling
+  tibble,     #   - a stricter alternative to data.frame
+  ggplot2,    #   - for plotting
+  cowplot    # adds plot_grid() to put multiple ggplot()'s togeter
+)
+
+import::from(magrittr, "%<>%")
+library(alpscarf)
+```
+
+## Data Import
+Import example data. The dataset __reduced_dwell.RData__ incldues AOI visit sequences for 17 participants (P1 - P8, P10 - P18). The dataset __aoi_sequence.RData__ contains the expected visit order of each AOI, as well as the color that presents each AOI.
+```{r get dataset}
+# specify dataset name & path
+dataset_path = "../data"
+example_dataset <- file.path(dataset_path, "reduced_dwell.RData")
+expected_aoi_sequence <- file.path(dataset_path, "aoi_sequence.RData")
+
+# load data  
+load(example_dataset)
+load(expected_aoi_sequence)
+
+# put AOIs in sorted order
+aoi_names_pages_seq %<>%
+  arrange(AOI_order)
+```
+
+## Generate Alpscarf
+When the data is ready, users would generate Alpscarf in following steps:
+
+1. Define colors for AOIs
+
+The association between AOIs and colors MUST be an 1-to-1 mapping; i.e., n AOIs require n colors. An exmaple mapping is included in the dataset __aoi_sequence.RData__.
+```{r color association}
+# define colors
+my_palette <- 
+  aoi_names_pages_seq$color[]
+```
+
+2. Translate visit sequence into bar height/width 
+
+Two funcitons are involved in this step:
+
+  * _alpscarf_height_trans_: the function calculates the confomity/revisiting scores and translate them into bar height
+  * _alpscarf_width_trans_: the function calculates the position of bars where bar width equals dwell duration (in logarithmic scale)
+```{r spec translation}
+# generate Alpscarf dataset
+lsa_reduced_dwell_alp_df <- 
+  lsa_reduced_dwell_df %>%
+  alpscarf_height_trans(., aoi_names_pages_seq) %>%
+  alpscarf_width_trans()
+```
+Note that some parameters specifiable in the function _alpscarf_height_trans_. Users can choose from linear mode (```LINEAR_MODE = TRUE```) and exponential mode (```LINEAR_MODE = FALSE```), which controls the contrast of mountain height (i.e., make high mountains even higher, and vice versa). In exponential mode, users can also specify the base (```base_factor```) and the scale (```scale_factor```) of exponent.
+
+3. Generate Alpscarf plot
+
+Now the dataset is ready for generating Alpscarf. In this example, we generate one Alpscarf per participant.
+```{r alpscarf plot}
+# initialise the list storing Alpscarfs, one plot per participant
+lsa_scarf_vis <- list()
+# specify plot height
+plot_height <- max(lsa_reduced_dwell_alp_df$seq_bar_length)
+
+for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
+  df_p <-
+    lsa_reduced_dwell_alp_df %>%
+    filter(p_name == a_p_name) 
+  
+  # for indexing
+  a_p_nr <- 
+    strsplit(a_p_name,"P")[[1]][2] %>%
+    as.numeric()
+  
+  # specify the color association of AOIs
+  aoi_name_in_order <- 
+    aoi_names_pages_seq$AOI[]
+  df_p$AOI <- factor(df_p$AOI, levels = aoi_name_in_order)
+  
+  # Alpscarf plot generation
+  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = plot_height, TITLE_EN = FALSE)
+}
+
+# plot Alpscarf for all participants
+plot_grid(lsa_scarf_vis[[7]], lsa_scarf_vis[[14]], lsa_scarf_vis[[11]], lsa_scarf_vis[[17]], lsa_scarf_vis[[15]], lsa_scarf_vis[[5]], lsa_scarf_vis[[1]], lsa_scarf_vis[[13]], lsa_scarf_vis[[16]], lsa_scarf_vis[[6]], lsa_scarf_vis[[4]], lsa_scarf_vis[[10]], lsa_scarf_vis[[12]], lsa_scarf_vis[[2]], lsa_scarf_vis[[3]], lsa_scarf_vis[[18]], lsa_scarf_vis[[8]], align = "hv", ncol = 2)
+# use ggsave to save plots
+ggsave(file = "temp.png", plot = last_plot(), width = 49, height = 49, device = "png", bg = "transparent")
+```
+Note that, in this example, we generate Alpscarf in __transition-focus__ mode. Users can also generate Alpscarf in __duration-focus__ mode (```TRANSITION_FOCUS = FALSE```), or even traditional scarf plot (```ALPSCARF_EN = FALSE```).
+
+Besides, ```max_y_value``` specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
+
