@@ -4,8 +4,8 @@
 \alias{alpscarf_height_trans}
 \title{calculate conformity/revisiting scores and translate them into bar height}
 \usage{
-alpscarf_height_trans(dwell_df, aoi_names_pages_seq, LINEAR_MODE = TRUE,
-  scale_factor = 0.1, base_factor = 2)
+alpscarf_height_trans(dwell_df = NULL, aoi_names_pages_seq = NULL,
+  LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2)
 }
 \arguments{
 \item{dwell_df}{the dataset of AOI visits, contains at least 2 columns, "p_name" "AOI"}

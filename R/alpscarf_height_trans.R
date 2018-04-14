@@ -10,7 +10,10 @@
 #' @export
 #' @importFrom magrittr "%<>%"
 #'
-alpscarf_height_trans <- function(dwell_df, aoi_names_pages_seq, LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2){
+alpscarf_height_trans <- function(dwell_df = NULL, aoi_names_pages_seq = NULL, LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2){
+  # check if all necessary arguments existed
+  if(missing(dwell_df)) stop("dwell_df is required")
+  if(missing(aoi_names_pages_seq)) stop("aoi_names_pages_seq is required")
 
   dwell_alp_df <- NULL
 
@@ -50,7 +53,7 @@ alpscarf_height_trans <- function(dwell_df, aoi_names_pages_seq, LINEAR_MODE = T
 #'
 #' @return revisiting scores
 #'
-alpscarf_revisit <- function(df_p, w = 3){
+alpscarf_revisit <- function(df_p = NULL, w = 3){
   # initialize revisiting score
   r <- rep(0, length(df_p$AOI))
 
@@ -72,7 +75,7 @@ alpscarf_revisit <- function(df_p, w = 3){
 #' @return conformity scores
 #' @importFrom magrittr "%<>%"
 #'
-alpscarf_conform <- function(df_p, aoi_names_pages_seq, s_min = 2){
+alpscarf_conform <- function(df_p = NULL, aoi_names_pages_seq = NULL, s_min = 2){
   # initialize conformity score
   c <- rep(0, length(df_p$AOI))
   # merge with the expected visit order

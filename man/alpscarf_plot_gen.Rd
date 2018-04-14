@@ -4,7 +4,7 @@
 \alias{alpscarf_plot_gen}
 \title{Alpscarf plot generation}
 \usage{
-alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE,
+alpscarf_plot_gen(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE,
   max_y_value = 4, ALPSCARF_EN = TRUE, creek_offset = 0.04,
   creek_size = 2, TITLE_EN = TRUE)
 }

@@ -4,7 +4,7 @@
 \alias{alpscarf_conform}
 \title{Calculation of conformity score}
 \usage{
-alpscarf_conform(df_p, aoi_names_pages_seq, s_min = 2)
+alpscarf_conform(df_p = NULL, aoi_names_pages_seq = NULL, s_min = 2)
 }
 \arguments{
 \item{df_p}{dataset contains AOI visits}

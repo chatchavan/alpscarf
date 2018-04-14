@@ -4,7 +4,7 @@
 \alias{alpscarf_calculate_statistics}
 \title{Calculate statistics (order_following/rereading ratio, Levenshtein/Jaro distance) to assist in reading Alpscarf}
 \usage{
-alpscarf_calculate_statistics(df_alp_p, aoi_names_pages_seq)
+alpscarf_calculate_statistics(df_alp_p = NULL, aoi_names_pages_seq = NULL)
 }
 \arguments{
 \item{df_alp_p}{dataset with Alpscarf info, at least four columns "p_name" "AOI" "conformity_score" "revisiting_score"}

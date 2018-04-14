@@ -8,7 +8,10 @@
 #' @import stringdist
 #' @importFrom magrittr "%<>%"
 #'
-alpscarf_calculate_statistics <- function(df_alp_p, aoi_names_pages_seq){
+alpscarf_calculate_statistics <- function(df_alp_p = NULL, aoi_names_pages_seq = NULL){
+  # check if all necessary arguments existed
+  if(missing(df_alp_p)) stop("df_alp_p is required")
+  if(missing(aoi_names_pages_seq)) stop("aoi_names_pages_seq is required")
 
   stat_table_df <- NULL
   for(a_p_name in unique(df_alp_p$p_name)){

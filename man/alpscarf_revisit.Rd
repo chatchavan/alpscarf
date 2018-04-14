@@ -4,7 +4,7 @@
 \alias{alpscarf_revisit}
 \title{Calculation of revisiting score}
 \usage{
-alpscarf_revisit(df_p, w = 3)
+alpscarf_revisit(df_p = NULL, w = 3)
 }
 \arguments{
 \item{df_p}{dataset contains AOI visits}

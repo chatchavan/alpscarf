@@ -6,7 +6,9 @@
 #' @export
 #' @importFrom magrittr "%<>%"
 #'
-alpscarf_width_trans <- function(dwell_df){
+alpscarf_width_trans <- function(dwell_df = NULL){
+  # check if all necessary arguments existed
+  if(missing(dwell_df)) stop("dwell_df is required")
 
   dwell_alp_df <- NULL
 
