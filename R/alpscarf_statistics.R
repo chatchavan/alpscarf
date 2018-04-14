@@ -105,3 +105,43 @@ alpscarf_calculate_statistics <- function(df_alp_p = NULL, aoi_names_pages_seq =
   stat_table_df
 
 }
+
+#' Calculate Levenshtein distance of each pair of the given set of sequences
+#'
+#' @param df_alp_p dataset with Alpscarf info, at least two columns "p_name" "AOI"
+#' @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
+#'
+#' @return LV_matrix_df, a Levenshtein-distance matrix of each pair of "p_name"
+#' @export
+#' @import stringdist
+#' @importFrom magrittr "%<>%"
+#'
+alpscarf_LV_matrix <- function(df_alp_p = NULL, aoi_names_pages_seq = NULL){
+  # check if all necessary arguments existed
+  if(missing(df_alp_p)) stop("df_alp_p is required")
+  if(missing(aoi_names_pages_seq)) stop("aoi_names_pages_seq is required")
+
+  df_alp_p %<>%
+    left_join(.,aoi_names_pages_seq, by = c("AOI"))
+
+  LV_matrix_df <- NULL
+  for(a_p_name in unique(df_alp_p$p_name)){
+    df_a <-
+      df_alp_p %>%
+      filter(p_name == a_p_name)
+    for(b_p_name in unique(df_alp_p$p_name)){
+      df_b <-
+        df_alp_p %>%
+        filter(p_name == b_p_name)
+
+      LV_result <- tibble(reading_seq_X = a_p_name, reading_seq_Y = b_p_name, LV = seq_dist(df_a$AOI_order, df_b$AOI_order, method = 'lv'))
+
+      LV_matrix_df %<>% bind_rows(LV_result)
+    }
+  }
+
+  # return
+  LV_matrix_df
+
+}
+
