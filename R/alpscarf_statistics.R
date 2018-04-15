@@ -5,8 +5,7 @@
 #'
 #' @return stats (order_following/rereading ratio, Levenshtein/Jaro distance)
 #' @export
-#' @import stringdist
-#' @importFrom magrittr "%<>%"
+#' @importFrom stringdist seq_dist
 #'
 alpscarf_calculate_statistics <- function(df_alp_p = NULL, aoi_names_pages_seq = NULL){
   # check if all necessary arguments existed
@@ -113,8 +112,7 @@ alpscarf_calculate_statistics <- function(df_alp_p = NULL, aoi_names_pages_seq =
 #'
 #' @return LV_matrix_df, a Levenshtein-distance matrix of each pair of "p_name"
 #' @export
-#' @import stringdist
-#' @importFrom magrittr "%<>%"
+#' @importFrom stringdist seq_dist
 #'
 alpscarf_LV_matrix <- function(df_alp_p = NULL, aoi_names_pages_seq = NULL){
   # check if all necessary arguments existed

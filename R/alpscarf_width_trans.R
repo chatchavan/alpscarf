@@ -4,7 +4,6 @@
 #'
 #' @return dataset with bar width information
 #' @export
-#' @importFrom magrittr "%<>%"
 #'
 alpscarf_width_trans <- function(dwell_df = NULL){
   # check if all necessary arguments existed

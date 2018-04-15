@@ -8,7 +8,6 @@
 #'
 #' @return dataset with conformity/revisiting scores and bar height information
 #' @export
-#' @importFrom magrittr "%<>%"
 #'
 alpscarf_height_trans <- function(dwell_df = NULL, aoi_names_pages_seq = NULL, LINEAR_MODE = TRUE, scale_factor = 0.1, base_factor = 2){
   # check if all necessary arguments existed
@@ -46,13 +45,13 @@ alpscarf_height_trans <- function(dwell_df = NULL, aoi_names_pages_seq = NULL, L
 
 }
 
-#' Calculation of revisiting score
-#'
-#' @param df_p dataset contains AOI visits
-#' @param w sequence length of revisir type to consider
-#'
-#' @return revisiting scores
-#'
+# Calculation of revisiting score
+#
+# @param df_p dataset contains AOI visits
+# @param w sequence length of revisir type to consider
+#
+# @return revisiting scores
+#
 alpscarf_revisit <- function(df_p = NULL, w = 3){
   # initialize revisiting score
   r <- rep(0, length(df_p$AOI))
@@ -66,15 +65,14 @@ alpscarf_revisit <- function(df_p = NULL, w = 3){
   r
 }
 
-#' Calculation of conformity score
-#'
-#' @param df_p dataset contains AOI visits
-#' @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
-#' @param s_min shortest length of sequence to consider
-#'
-#' @return conformity scores
-#' @importFrom magrittr "%<>%"
-#'
+# Calculation of conformity score
+#
+# @param df_p dataset contains AOI visits
+# @param aoi_names_pages_seq expected visit order, two columns "AOI" and "AOI_order"
+# @param s_min shortest length of sequence to consider
+#
+# @return conformity scores
+#
 alpscarf_conform <- function(df_p = NULL, aoi_names_pages_seq = NULL, s_min = 2){
   # initialize conformity score
   c <- rep(0, length(df_p$AOI))

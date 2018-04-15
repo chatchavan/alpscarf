@@ -12,17 +12,8 @@ vignette: >
 ## Initial Setup
 Import the library we suggest to use and the package _alpscarf_.
 ```{r setup, echo = FALSE}
-# The following code loads package (and install them if not exist).
-## The "pacman" package automatically install missing packages and load them
-if (!require("pacman")) install.packages("pacman", repos='https://stat.ethz.ch/CRAN/'); library(pacman)
-p_load(
-  tidyr,      # collection of the tidyverse packages:
-  dplyr,      #   - for data wrangling
-  tibble,     #   - a stricter alternative to data.frame
-  ggplot2,    #   - for plotting
-  cowplot    # adds plot_grid() to put multiple ggplot()'s togeter
-)
-
+library(tidyverse)
+import::from(cowplot, plot_grid)
 import::from(magrittr, "%<>%")
 library(alpscarf)
 ```

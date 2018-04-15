@@ -11,7 +11,6 @@
 #'
 #' @return Alpscarf plot
 #' @export
-#' @importFrom magrittr "%<>%"
 #'
 alpscarf_plot_gen <- function(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE, max_y_value = 4, ALPSCARF_EN = TRUE, creek_offset = 0.04, creek_size = 2, TITLE_EN = TRUE) {
   # check if all necessary arguments existed
