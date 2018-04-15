@@ -32,7 +32,34 @@ In `/vignettes/alpscarf.Rmd` you would find an example which guides users to gen
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Resources
+## How to cite
 
-* [CHI 2018 Late Breaking Work](https://zpac.ch/chi2018/Alpscarf.pdf)
-* [video preview (30 seconds)](https://zpac.ch/chi2018/Alpscarf.mp4)
+If you use Alpscarf in your research, we would appreciate if you can insert the following citation
+
+```
+Chia-Kai Yang and Chat Wacharamanotham. 2018. Alpscarf: Augmenting Scarf Plots for Exploring Temporal Gaze Patterns. In Proceedings of the 2018 CHI Conference Extended Abstracts on Human Factors in Computing Systems (CHI EA '18). ACM, New York, NY, USA, (To appear). DOI: https://doi.org/10.1145/3170427.3188490
+```
+
+In bibtex:
+
+```
+@inproceedings{Yang2018,
+ author = {Yang, Chia-Kai and Wacharamanotham, Chat},
+ title = {Alpscarf: Augmenting Scarf Plots for Exploring Temporal Gaze Patterns},
+ booktitle = {Proceedings of the 2018 CHI Conference Extended Abstracts on Human Factors in Computing Systems},
+ series = {CHI EA '18},
+ year = {2018},
+ location = {Montreal, Quebec, Canada},
+ pages = {To appear},
+ numpages = {6},
+ url = {https://doi.org/10.1145/3170427.3188490},
+ doi = {10.1145/3170427.3188490},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {visualization, eyemovement, scarf plot, transitions},
+} 
+```
+
+## See also
+
+* Paper and video previes [Alpscarf website](https://zpac.ch/alpscarf)
