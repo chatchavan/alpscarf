@@ -34,5 +34,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Resources
 
-* [CHI 2018 Late Breaking Work](https://zpac.ch/chi2018/Alpscarf.pdf)
-* [video preview (30 seconds)](https://zpac.ch/chi2018/Alpscarf.mp4)
+* [CHI 2018 Late Breaking Work](https://www.zpac.ch/alpscarf/)
