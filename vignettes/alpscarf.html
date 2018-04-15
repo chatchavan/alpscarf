@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Chia-Kai Yang" />
+
+<meta name="date" content="2018-04-15" />
+
+<title>alpscarf</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">alpscarf</h1>
+<h4 class="author"><em>Chia-Kai Yang</em></h4>
+<h4 class="date"><em>2018-04-15</em></h4>
+
+
+
+<div id="initial-setup" class="section level2">
+<h2>Initial Setup</h2>
+<p>Import the library we suggest to use and the package <em>alpscarf</em>.</p>
+<pre><code>## Loading required package: pacman</code></pre>
+</div>
+<div id="data-import" class="section level2">
+<h2>Data Import</h2>
+<p>Import example data. The dataset <em>reduced_dwell.RData</em> includes <strong>AOI visit sequences</strong> for 17 participants (P1 - P8, P10 - P18). The dataset <em>aoi_sequence.RData</em> contains the <strong>expected visit order</strong> of each AOI, as well as the <strong>color association</strong> of AOIs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># specify dataset name &amp; path</span>
+dataset_path =<span class="st"> &quot;../data&quot;</span>
+example_dataset &lt;-<span class="st"> </span><span class="kw">file.path</span>(dataset_path, <span class="st">&quot;reduced_dwell.RData&quot;</span>)
+expected_aoi_sequence &lt;-<span class="st"> </span><span class="kw">file.path</span>(dataset_path, <span class="st">&quot;aoi_sequence.RData&quot;</span>)
+
+<span class="co"># load data  </span>
+<span class="kw">load</span>(example_dataset)
+<span class="kw">load</span>(expected_aoi_sequence)
+
+<span class="co"># put AOIs in sorted order</span>
+aoi_names_pages_seq <span class="op">%&lt;&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(AOI_order)</code></pre></div>
+<p>The <strong>AOI visit sequences</strong> contains at least 3 columns: “AOI” “dwell_duration” “p_name”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(lsa_reduced_dwell_df)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   AOI    dwell_duration p_name
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt; 
+## 1 AOI_P1        195120. P1    
+## 2 AOI_P2         22684. P1    
+## 3 AOI_P1         19414. P1    
+## 4 AOI_P2           810. P1    
+## 5 AOI_P1           340. P1    
+## 6 AOI_P2          3051. P1</code></pre>
+<p>The <strong>expected visit order</strong> contains at least two columns: “AOI” and “AOI_order”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(aoi_names_pages_seq)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   AOI               AOI_order color  
+##   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;  
+## 1 AOI_P1                    1 #FFFF33
+## 2 AOI_P2                    2 #E5C494
+## 3 MISC_P3                   3 #BAD6EB
+## 4 E1_R1_OBJ                 4 #A3CCE3
+## 5 E1_R2_AWAREPRIME          5 #88BEDC
+## 6 E1_R3_AWAREEFFECT         6 #6BAED6</code></pre>
+<p>In above example dataset, we merge the <strong>expected visit order</strong> with and <strong>color association</strong>, resulting the an extra column <code>color</code>.</p>
+</div>
+<div id="generate-alpscarf" class="section level2">
+<h2>Generate Alpscarf</h2>
+<p>When the data is ready, users can generate Alpscarf in following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Define colors for AOIs</li>
+</ol>
+<p>The association between AOIs and colors MUST be an 1-to-1 mapping; i.e., n AOIs require n colors. An exmaple of such mapping is included in the dataset <em>aoi_sequence.RData</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define colors</span>
+my_palette &lt;-<span class="st"> </span>
+<span class="st">  </span>aoi_names_pages_seq<span class="op">$</span>color[]</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Translate visit sequence into bar height/width</li>
+</ol>
+<p>Two funcitons are involved in this step:</p>
+<ul>
+<li><em>alpscarf_height_trans</em>: the function calculates the confomity/revisiting scores and translate them into bar height</li>
+<li><em>alpscarf_width_trans</em>: the function calculates the position of bars where bar width equals dwell duration (in logarithmic scale)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># generate Alpscarf dataset</span>
+lsa_reduced_dwell_alp_df &lt;-<span class="st"> </span>
+<span class="st">  </span>lsa_reduced_dwell_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">alpscarf_height_trans</span>(., aoi_names_pages_seq) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">alpscarf_width_trans</span>()</code></pre></div>
+<p>Note that some parameters are specifiable in the function <em>alpscarf_height_trans</em>. Users can choose from linear mode (<code>LINEAR_MODE = TRUE</code>) and exponential mode (<code>LINEAR_MODE = FALSE</code>), which controls the contrast of mountain height (i.e., make high mountains even higher, and vice versa). In exponential mode, users can also specify the base (<code>base_factor</code>) and the scale (<code>scale_factor</code>) of exponent.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Generate Alpscarf plot</li>
+</ol>
+<p>Now the dataset is ready for generating Alpscarf. In this example, we generate one Alpscarf per participant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialise the list storing Alpscarfs, one plot per participant</span>
+lsa_scarf_vis &lt;-<span class="st"> </span><span class="kw">list</span>()
+<span class="co"># specify plot height</span>
+plot_height &lt;-<span class="st"> </span><span class="kw">max</span>(lsa_reduced_dwell_alp_df<span class="op">$</span>seq_bar_length)
+
+<span class="cf">for</span>(a_p_name <span class="cf">in</span> <span class="kw">unique</span>(lsa_reduced_dwell_alp_df<span class="op">$</span>p_name)){
+  df_p &lt;-
+<span class="st">    </span>lsa_reduced_dwell_alp_df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(p_name <span class="op">==</span><span class="st"> </span>a_p_name) 
+  
+  <span class="co"># for indexing</span>
+  a_p_nr &lt;-<span class="st"> </span>
+<span class="st">    </span><span class="kw">strsplit</span>(a_p_name,<span class="st">&quot;P&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">as.numeric</span>()
+  
+  <span class="co"># specify the color association of AOIs</span>
+  aoi_name_in_order &lt;-<span class="st"> </span>
+<span class="st">    </span>aoi_names_pages_seq<span class="op">$</span>AOI[]
+  df_p<span class="op">$</span>AOI &lt;-<span class="st"> </span><span class="kw">factor</span>(df_p<span class="op">$</span>AOI, <span class="dt">levels =</span> aoi_name_in_order)
+  
+  <span class="co"># Alpscarf plot generation</span>
+  lsa_scarf_vis[[a_p_nr]] &lt;-<span class="st"> </span><span class="kw">alpscarf_plot_gen</span>(df_p, my_palette, <span class="dt">TRANSITION_FOCUS =</span> <span class="ot">TRUE</span>, <span class="dt">ALPSCARF_EN =</span> <span class="ot">TRUE</span>,  <span class="dt">max_y_value =</span> plot_height, <span class="dt">TITLE_EN =</span> <span class="ot">FALSE</span>)
+}
+
+<span class="co"># plot Alpscarf for all participants</span>
+<span class="kw">plot_grid</span>(lsa_scarf_vis[[<span class="dv">7</span>]], lsa_scarf_vis[[<span class="dv">14</span>]], lsa_scarf_vis[[<span class="dv">11</span>]], lsa_scarf_vis[[<span class="dv">17</span>]], lsa_scarf_vis[[<span class="dv">15</span>]], lsa_scarf_vis[[<span class="dv">5</span>]], lsa_scarf_vis[[<span class="dv">1</span>]], lsa_scarf_vis[[<span class="dv">13</span>]], lsa_scarf_vis[[<span class="dv">16</span>]], lsa_scarf_vis[[<span class="dv">6</span>]], lsa_scarf_vis[[<span class="dv">4</span>]], lsa_scarf_vis[[<span class="dv">10</span>]], lsa_scarf_vis[[<span class="dv">12</span>]], lsa_scarf_vis[[<span class="dv">2</span>]], lsa_scarf_vis[[<span class="dv">3</span>]], lsa_scarf_vis[[<span class="dv">18</span>]], lsa_scarf_vis[[<span class="dv">8</span>]], <span class="dt">align =</span> <span class="st">&quot;hv&quot;</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use ggsave to save plots</span>
+<span class="kw">ggsave</span>(<span class="dt">file =</span> <span class="st">&quot;temp.png&quot;</span>, <span class="dt">plot =</span> <span class="kw">last_plot</span>(), <span class="dt">width =</span> <span class="dv">49</span>, <span class="dt">height =</span> <span class="dv">49</span>, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;transparent&quot;</span>)</code></pre></div>
+<p>Note that, in above example, we generate Alpscarf in <strong>transition-focus</strong> mode. Users can also generate Alpscarf in <strong>duration-focus</strong> mode (<code>TRANSITION_FOCUS = FALSE</code>), or even traditional scarf plot (<code>ALPSCARF_EN = FALSE</code>).</p>
+<p>Besides, <code>max_y_value</code> specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>(bonus) Distance measures of AOI visit sequences</li>
+</ol>
+<p><strong>This part is NOT necessary to generate Alpscarf plot</strong></p>
+<p>Additionally, users can get a few <strong>descriptive stats</strong> (e.g., order_following, rereading ratio), and <strong>edit distance</strong> between each AOI sequence and the expected visit order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># generate stats of Alpscarf; NOT required in generating Alpscarf.</span>
+stat_table_df &lt;-<span class="st"> </span><span class="kw">alpscarf_calculate_statistics</span>(lsa_reduced_dwell_alp_df, aoi_names_pages_seq)
+
+<span class="kw">head</span>(stat_table_df)</code></pre></div>
+<pre><code>## # A tibble: 6 x 18
+##   p_name total order_follow re_reading no_order_follow_nor_re_re… graphAOI
+##   &lt;chr&gt;  &lt;int&gt;        &lt;int&gt;      &lt;int&gt;                      &lt;int&gt;    &lt;int&gt;
+## 1 P1       165          129        143                         10       19
+## 2 P10      262          177        208                         34       31
+## 3 P11      271          177        243                         10       19
+## 4 P12      103           74         77                         11       10
+## 5 P13      226          149        192                         16       31
+## 6 P14       85           67         52                          8        4
+## # ... with 12 more variables: graphAOI_rereading &lt;int&gt;,
+## #   ratio_order_follow &lt;dbl&gt;, ratio_re_reading &lt;dbl&gt;,
+## #   ratio_no_order_follow_nor_re_reading &lt;dbl&gt;,
+## #   ratio_graphAOI_rereading_in_graphAOI &lt;dbl&gt;, distance_LV &lt;dbl&gt;,
+## #   distance_LV_normalised &lt;dbl&gt;, distance_OSA &lt;dbl&gt;,
+## #   distance_OSA_normalised &lt;dbl&gt;, distance_DL &lt;dbl&gt;,
+## #   distance_DL_normalised &lt;dbl&gt;, distance_Jaro &lt;dbl&gt;</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
