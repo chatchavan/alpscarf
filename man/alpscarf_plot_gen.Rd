@@ -9,7 +9,7 @@ alpscarf_plot_gen(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE,
   creek_size = 2, TITLE_EN = TRUE)
 }
 \arguments{
-\item{df_p}{dataset contains the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"}
+\item{df_p}{a data frame containing the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"}
 
 \item{my_palette}{the color definition}
 
@@ -26,7 +26,7 @@ alpscarf_plot_gen(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE,
 \item{TITLE_EN}{print participant name, default = TRUE}
 }
 \value{
-Alpscarf plot
+Alpscarf plot as a ggplot2 object
 }
 \description{
 Alpscarf plot generation
