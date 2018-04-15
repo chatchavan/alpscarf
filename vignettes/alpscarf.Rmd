@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
+  
 ## Initial Setup
 Import the library we suggest to use and the package _alpscarf_.
 ```{r setup, echo = FALSE}
@@ -40,7 +40,6 @@ The __AOI visit sequences__ contains at least 3 columns: "AOI" "dwell_duration" 
 head(lsa_reduced_dwell_df)
 ```
 
-
 The __expected visit order__ contains at least two columns: "AOI" and "AOI_order".
 ```{r}
 head(aoi_names_pages_seq)
@@ -50,7 +49,7 @@ In above example dataset, we merge the __expected visit order__ with and __color
 ## Generate Alpscarf
 When the data is ready, users can generate Alpscarf in following steps:
 
-1. Define colors for AOIs
+###1. Define colors for AOIs
 
 The association between AOIs and colors MUST be an 1-to-1 mapping; i.e., n AOIs require n colors. An exmaple of such mapping is included in the dataset _aoi_sequence.RData_.
 ```{r color association}
@@ -59,12 +58,12 @@ my_palette <-
   aoi_names_pages_seq$color[]
 ```
 
-2. Translate visit sequence into bar height/width 
+###2. Translate visit sequence into bar height/width 
 
 Two funcitons are involved in this step:
 
-  * _alpscarf_height_trans_: the function calculates the confomity/revisiting scores and translate them into bar height
-  * _alpscarf_width_trans_: the function calculates the position of bars where bar width equals dwell duration (in logarithmic scale)
+* _alpscarf_height_trans_: the function calculates the confomity/revisiting scores and translate them into bar height
+* _alpscarf_width_trans_: the function calculates the position of bars where bar width equals dwell duration (in logarithmic scale)
 ```{r spec translation}
 # generate Alpscarf dataset
 lsa_reduced_dwell_alp_df <- 
@@ -74,9 +73,11 @@ lsa_reduced_dwell_alp_df <-
 ```
 Note that some parameters are specifiable in the function _alpscarf_height_trans_. Users can choose from linear mode (```LINEAR_MODE = TRUE```) and exponential mode (```LINEAR_MODE = FALSE```), which controls the contrast of mountain height (i.e., make high mountains even higher, and vice versa). In exponential mode, users can also specify the base (```base_factor```) and the scale (```scale_factor```) of exponent.
 
-3. Generate Alpscarf plot
+###3. Generate Alpscarf plot
 
 Now the dataset is ready for generating Alpscarf. In this example, we generate one Alpscarf per participant.
+
+###Example 1: Alpscarf in normalized view
 ```{r alpscarf plot}
 # initialise the list storing Alpscarfs, one plot per participant
 lsa_scarf_vis <- list()
@@ -99,20 +100,66 @@ for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
   df_p$AOI <- factor(df_p$AOI, levels = aoi_name_in_order)
   
   # Alpscarf plot generation
-  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = plot_height, TITLE_EN = FALSE)
+  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = plot_height, TITLE_EN = FALSE, NORMALIZED_VIEW = TRUE)
 }
 
 # plot Alpscarf for all participants
 plot_grid(lsa_scarf_vis[[7]], lsa_scarf_vis[[14]], lsa_scarf_vis[[11]], lsa_scarf_vis[[17]], lsa_scarf_vis[[15]], lsa_scarf_vis[[5]], lsa_scarf_vis[[1]], lsa_scarf_vis[[13]], lsa_scarf_vis[[16]], lsa_scarf_vis[[6]], lsa_scarf_vis[[4]], lsa_scarf_vis[[10]], lsa_scarf_vis[[12]], lsa_scarf_vis[[2]], lsa_scarf_vis[[3]], lsa_scarf_vis[[18]], lsa_scarf_vis[[8]], align = "hv", ncol = 2)
-# use ggsave to save plots
-ggsave(file = "temp.png", plot = last_plot(), width = 49, height = 49, device = "png", bg = "transparent")
 ```
-Note that, in above example, we generate Alpscarf in __transition-focus__ mode. Users can also generate Alpscarf in __duration-focus__ mode (```TRANSITION_FOCUS = FALSE```), or even traditional scarf plot (```ALPSCARF_EN = FALSE```).
 
-Besides, ```max_y_value``` specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
+Notice that, ```max_y_value``` specify the height of each plot. To make all Alpscarf comparable, generating Alpscarfs in the same height is highly recommended.
+
+In Example 1, the generate plots are: 
+
+* __Alpscarf__ (```ALPSCARF_EN = TRUE```): users can also generate traditional scarf plots (```ALPSCARF_EN = FALSE```).
+* __transition-focus__ mode (```TRANSITION_FOCUS = TRUE```): Users can also generate Alpscarf in __duration-focus__ mode (```TRANSITION_FOCUS = FALSE```)
+* __normalized view__ (```NORMALIZED_VIEW = TRUE```): all generated plots are of the same length. Users can also generate unnormalized view (```NORMALIZED_VIEW = FALSE```) as shown in the next example.
+
+###Example 2: Alpscarf in unnormalized view
+```{r alpscarf plot in unnormalized view}
+# initialise the list storing Alpscarfs, one plot per participant
+lsa_scarf_vis <- list()
+# specify plot height
+plot_height <- max(lsa_reduced_dwell_alp_df$seq_bar_length)
+# specify plot width range; used in unnormalized view
+max_nr_transitions <- 
+  lsa_reduced_dwell_alp_df$trial %>%
+  max()
+max_sum_dwell_duration_category <-
+  lsa_reduced_dwell_alp_df %>% 
+  group_by(p_name) %>% 
+  summarise(total = sum(dwell_duration_category)) %>% 
+  select(total) %>% 
+  max()
+
+for(a_p_name in unique(lsa_reduced_dwell_alp_df$p_name)){
+  df_p <-
+    lsa_reduced_dwell_alp_df %>%
+    filter(p_name == a_p_name) 
+  
+  # for indexing
+  a_p_nr <- 
+    strsplit(a_p_name,"P")[[1]][2] %>%
+    as.numeric()
+  
+  # specify the color association of AOIs
+  aoi_name_in_order <- 
+    aoi_names_pages_seq$AOI[]
+  df_p$AOI <- factor(df_p$AOI, levels = aoi_name_in_order)
+  
+  # Alpscarf plot generation
+  # Alpscarf plot generation
+  lsa_scarf_vis[[a_p_nr]] <- alpscarf_plot_gen(df_p, my_palette, TRANSITION_FOCUS = TRUE, ALPSCARF_EN = TRUE,  max_y_value = plot_height, TITLE_EN = FALSE, NORMALIZED_VIEW = FALSE, max_nr_transitions = max_nr_transitions, max_sum_dwell_duration_category = max_sum_dwell_duration_category)
+}
+
+# plot Alpscarf for all participants
+plot_grid(lsa_scarf_vis[[7]], lsa_scarf_vis[[14]], lsa_scarf_vis[[11]], lsa_scarf_vis[[17]], lsa_scarf_vis[[15]], lsa_scarf_vis[[5]], lsa_scarf_vis[[1]], lsa_scarf_vis[[13]], lsa_scarf_vis[[16]], lsa_scarf_vis[[6]], lsa_scarf_vis[[4]], lsa_scarf_vis[[10]], lsa_scarf_vis[[12]], lsa_scarf_vis[[2]], lsa_scarf_vis[[3]], lsa_scarf_vis[[18]], lsa_scarf_vis[[8]], align = "hv", ncol = 2)
+```
+
+In addition to setting ```NORMALIZED_VIEW = FALSE```, unnormalized view requires two extra arguments: ```max_nr_transitions``` and ```max_sum_dwell_duration_category```, which define the maximun length of plots in __transition-focus__ mode and __duraiton-focus__ mode respectivelty.
 
 
-4. (bonus) Distance measures of AOI visit sequences
+###4. (bonus) Distance measures of AOI visit sequences
 
 __This part is NOT necessary to generate Alpscarf plot__
 

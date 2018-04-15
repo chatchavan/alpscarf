@@ -6,7 +6,8 @@
 \usage{
 alpscarf_plot_gen(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE,
   max_y_value = 4, ALPSCARF_EN = TRUE, creek_offset = 0.04,
-  creek_size = 2, TITLE_EN = TRUE)
+  creek_size = 2, TITLE_EN = TRUE, NORMALIZED_VIEW = TRUE,
+  max_nr_transitions = 0, max_sum_dwell_duration_category = 0)
 }
 \arguments{
 \item{df_p}{a data frame containing the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"}
@@ -24,6 +25,12 @@ alpscarf_plot_gen(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE,
 \item{creek_size}{to adjust the size of creeks, default = 2}
 
 \item{TITLE_EN}{print participant name, default = TRUE}
+
+\item{NORMALIZED_VIEW}{to select between normalized view (TRUE) and unnormalized view (FALSE), default = TRUE. In normalized view, all generated Alpscarf are in the same length. In unnormalized view, users need to specify the maximum length of generated Alpscarf.}
+
+\item{max_nr_transitions}{specify the maximum number of transitions in given dataset. Only used in unnormalized view (NORMALIZED_VIEW= FALSE).}
+
+\item{max_sum_dwell_duration_category}{specify the maximum number of the sum of total dwell durations (in log scale) in given dataset. Only used in unnormalized view. (NORMALIZED_VIEW= FALSE)}
 }
 \value{
 Alpscarf plot as a ggplot2 object
