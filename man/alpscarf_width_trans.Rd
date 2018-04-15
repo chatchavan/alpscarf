@@ -7,10 +7,10 @@
 alpscarf_width_trans(dwell_df = NULL)
 }
 \arguments{
-\item{dwell_df}{dataset contains at least 3 columns, "p_name" "AOI" "dwell_duration"}
+\item{dwell_df}{a data frame contains at least 3 columns, "p_name" "AOI" "dwell_duration"}
 }
 \value{
-dataset with bar width information
+a tibble with bar width information
 }
 \description{
 translate durations into bar width

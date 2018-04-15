@@ -1,6 +1,6 @@
 #' Alpscarf plot generation
 #'
-#' @param df_p dataset contains the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"
+#' @param df_p a data frame containing the bar width/height info of Alpscarf, contains at least 6 columns "AOI" "trial" "bar_position" "dwell_duration_category" "seq_bar_length" "re_reading_bar_length"
 #' @param my_palette the color definition
 #' @param TRANSITION_FOCUS to select between transition-focus (TRUE) and duration-focus (FALSE) mode, default = TRUE
 #' @param max_y_value the range (in y-axis) to plot
@@ -9,7 +9,7 @@
 #' @param creek_size to adjust the size of creeks, default = 2
 #' @param TITLE_EN print participant name, default = TRUE
 #'
-#' @return Alpscarf plot
+#' @return Alpscarf plot as a ggplot2 object
 #' @export
 #'
 alpscarf_plot_gen <- function(df_p = NULL, my_palette = NULL, TRANSITION_FOCUS = TRUE, max_y_value = 4, ALPSCARF_EN = TRUE, creek_offset = 0.04, creek_size = 2, TITLE_EN = TRUE) {

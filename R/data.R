@@ -2,6 +2,7 @@
 #'
 #' A dataset containing the AOI names, their expected visit order, and color association. The variables are as follows:
 #'
+#' @docType data
 #' @format A data frame with 37 rows and 3 variables:
 #' \describe{
 #'   \item{AOI}{the name of AOI}
@@ -15,6 +16,7 @@
 #'
 #' A dataset containing a sequence of AOI visits for multiple participants. The variables are as follows:
 #'
+#' @docType data
 #' @format A data frame with 3048 rows and 3 variables:
 #' \describe{
 #'   \item{p_name}{participant name (P1--P18)}

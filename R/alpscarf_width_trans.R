@@ -1,8 +1,8 @@
 #' translate durations into bar width
 #'
-#' @param dwell_df dataset contains at least 3 columns, "p_name" "AOI" "dwell_duration"
+#' @param dwell_df a data frame contains at least 3 columns, "p_name" "AOI" "dwell_duration"
 #'
-#' @return dataset with bar width information
+#' @return a tibble with bar width information
 #' @export
 #'
 alpscarf_width_trans <- function(dwell_df = NULL){
