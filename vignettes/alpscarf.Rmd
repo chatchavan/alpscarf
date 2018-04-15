@@ -4,7 +4,7 @@ author: "Chia-Kai Yang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{alpscarf}
+  %\VignetteIndexEntry{alpscarf tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
